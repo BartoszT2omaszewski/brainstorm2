@@ -1,50 +1,45 @@
+import 'package:brainstorm2/models/idea_model.dart';
 import 'package:flutter/material.dart';
 
 class IdeaCard extends StatelessWidget {
-  final String title;
-  final String description;
-  final String author;
+  final IdeaModel idea;
 
-  const IdeaCard(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.author});
+  const IdeaCard({Key? key, required this.idea}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Column(
-        children: [
-          // Idea card content here
-          ListTile(
-            title: Text(title),
-            subtitle: Text(description),
-            trailing: Text(author),
-          ),
-          ButtonBar(
-            children: [
-              IconButton(
-                icon: const Icon(Icons.thumb_up),
-                onPressed: () {
-                  // Handle upvote button press
-                },
+      elevation: 2.0,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8.0),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Container(
+                color: Colors.grey[300],
               ),
-              IconButton(
-                icon: const Icon(Icons.thumb_down),
-                onPressed: () {
-                  // Handle downvote button press
-                },
-              ),
-              IconButton(
-                icon: const Icon(Icons.comment),
-                onPressed: () {
-                  // Handle comment button press
-                },
-              ),
-            ],
-          ),
-        ],
+            ),
+            const SizedBox(height: 8.0),
+            Text(
+              'Author: ${idea.author}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            Text(
+              'Title: ${idea.title}',
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 4.0),
+            Text(
+              'Description: ${idea.description}',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
       ),
     );
   }

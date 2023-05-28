@@ -1,105 +1,106 @@
-import 'package:brainstorm2/screens/adding_page.dart';
-import 'package:brainstorm2/screens/idea_validation_hub.dart';
-import 'package:brainstorm2/widgets/app_bar.dart';
-import 'package:brainstorm2/widgets/bottom_navigation_bar.dart';
-import 'package:brainstorm2/widgets/idea_card.dart';
-import 'package:flutter/material.dart';
+// import 'package:brainstorm2/screens/adding_page.dart';
+// import 'package:brainstorm2/screens/idea_validation_hub.dart';
+// import 'package:brainstorm2/widgets/idea_card.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import 'package:brainstorm2/widgets/app_bar.dart';
+// import 'package:brainstorm2/widgets/bottom_navigation_bar.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+// class HomePage extends StatelessWidget {
+//   const HomePage({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: MyAppBar(
-        title: 'Strona Główna',
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.add),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const AddingPage()),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.check),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const IdeaValidationHub()),
-              );
-            },
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Row(
-                children: const [
-                  FlutterLogo(
-                    size: 50,
-                  ),
-                  SizedBox(width: 8.0),
-                  Text(
-                    'BrainStorm',
-                    style:
-                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              color: Colors.blue,
-              padding: const EdgeInsets.symmetric(vertical: 24.0),
-              child: Column(
-                children: const [
-                  Text(
-                    'Witaj w',
-                    style: TextStyle(fontSize: 24.0, color: Colors.white),
-                  ),
-                  SizedBox(height: 8.0),
-                  Text(
-                    'BrainStorm - Idea Validation Hub',
-                    style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  SizedBox(height: 16.0),
-                  Text(
-                    'Zgłoś swoje pomysły, podziel się nimi z innymi i uzyskaj społeczne potwierdzenie!',
-                    style: TextStyle(fontSize: 18.0, color: Colors.white),
-                    textAlign: TextAlign.center,
-                  ),
-                ],
-              ),
-            ),
-            const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                'Popularne Pomysły',
-                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-              ),
-            ),
-            // Add popular ideas cards or grid/carousel here
-            const IdeaCard(
-              author: '', description: '', title: '',
-              // Pass the idea details as parameters
-            ),
-            const SizedBox(height: 16.0),
-          ],
-        ),
-      ),
-      bottomNavigationBar: const MyBottomNavigationBar(
-        selectedPage: BottomNavigationBarPage.home,
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: const MyAppBar(
+//         title: 'Strona Główna',
+//       ),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.stretch,
+//           children: [
+//             const Text(
+//               'Powitanie i opis',
+//               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+//             ),
+//             const SizedBox(height: 16.0),
+//             const Text(
+//               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam tristique magna eget vestibulum venenatis. Phasellus pharetra odio vitae dolor vestibulum, sed convallis lacus congue.',
+//               style: TextStyle(fontSize: 16),
+//             ),
+//             const SizedBox(height: 24.0),
+//             const Text(
+//               'Sekcja z popularnymi pomysłami',
+//               style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+//             ),
+//             const SizedBox(height: 16.0),
+//             Expanded(
+//               child: ListView(
+//                 children: const [
+//                   IdeaCard(
+//                     author: 'John Doe',
+//                     title: 'Amazing Idea 1',
+//                     description: 'This is an amazing idea for the project.',
+//                   ),
+//                   SizedBox(height: 16.0),
+//                   IdeaCard(
+//                     author: 'Jane Smith',
+//                     title: 'Innovative Idea 2',
+//                     description: 'This idea will revolutionize the industry.',
+//                   ),
+//                   SizedBox(height: 16.0),
+//                   IdeaCard(
+//                     author: 'Alex Johnson',
+//                     title: 'Creative Idea 3',
+//                     description: 'A unique and creative idea to explore.',
+//                   ),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//       bottomNavigationBar: const MyBottomNavigationBar(
+//           selectedPage: BottomNavigationBarPage.home),
+//     );
+//   }
+// }
+
+// class IdeaCard extends StatelessWidget {
+//   final String author;
+//   final String title;
+//   final String description;
+
+//   const IdeaCard({
+//     super.key,
+//     required this.author,
+//     required this.title,
+//     required this.description,
+//   });
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Card(
+//       child: Column(
+//         children: [
+//           Container(
+//             height: 120,
+//             width: double.infinity,
+//             color: Colors.grey[300],
+//           ),
+//           const SizedBox(height: 8.0),
+//           Text(
+//             'Author: $author',
+//             style: const TextStyle(fontWeight: FontWeight.bold),
+//           ),
+//           Text(
+//             'Title: $title',
+//             style: const TextStyle(fontWeight: FontWeight.bold),
+//           ),
+//           Text('Description: $description'),
+//         ],
+//       ),
+//     );
+//   }
+// }

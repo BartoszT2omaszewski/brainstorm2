@@ -1,5 +1,6 @@
-import 'package:brainstorm2/home_page.dart';
+import 'package:brainstorm2/models/idea_model.dart';
 import 'package:brainstorm2/screens/adding_page.dart';
+import 'package:brainstorm2/screens/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,14 +13,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Your App',
+      title: 'Brainstorm',
       theme: ThemeData(
-          // theme data
-          ),
+        primarySwatch: Colors.blue,
+      ),
       initialRoute: '/',
       routes: {
-        '/': (context) => const HomePage(),
-        '/adding': (context) => const AddingPage(),
+        '/': (context) => HomePage(
+              addIdea: (IdeaModel) {},
+              ideas: const [],
+            ),
+        '/adding': (context) => AddingPage(
+              addIdea: (IdeaModel idea) {},
+            ),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(builder: (context) => const ErrorPage());
