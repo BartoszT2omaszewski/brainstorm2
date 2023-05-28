@@ -6,6 +6,10 @@ abstract class HomeState extends Equatable {
 
   @override
   List<Object?> get props => [];
+
+  Iterable get ideas => null;
+
+  // Iterable get ideas => null;
 }
 
 class HomeInitial extends HomeState {}
@@ -20,6 +24,7 @@ class HomeNavigation extends HomeState {
 }
 
 class HomeData extends HomeState {
+  @override
   final List<IdeaModel> ideas;
 
   const HomeData(this.ideas);

@@ -77,7 +77,7 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: MyBottomNavigationBar(
         selectedPage: BottomNavigationBarPage.home,
         onPageSelected: (page) {
-          context.read<HomeCubit>().navigateToPage(page as int);
+          context.read<HomeCubit>().navigateToPage(page);
         },
       ),
     );
