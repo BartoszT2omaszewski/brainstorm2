@@ -1,60 +1,44 @@
 import 'package:flutter/material.dart';
 
-enum BottomNavigationBarPage { home, adding, validation }
+enum BottomNavigationBarPage {
+  home,
+  addIdea,
+  validate,
+  validation,
+}
 
 class MyBottomNavigationBar extends StatelessWidget {
   final BottomNavigationBarPage selectedPage;
+  final void Function(BottomNavigationBarPage) onPageSelected;
 
-  const MyBottomNavigationBar({super.key, required this.selectedPage});
+  const MyBottomNavigationBar({
+    Key? key,
+    required this.selectedPage,
+    required this.onPageSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: _getPageIndex(selectedPage),
+      currentIndex: selectedPage.index,
       onTap: (index) {
-        _navigateToPage(context, index);
+        final selectedPage = BottomNavigationBarPage.values[index];
+        onPageSelected(selectedPage);
       },
       items: const [
         BottomNavigationBarItem(
           icon: Icon(Icons.home),
-          label: 'Strona Główna',
+          label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.add),
-          label: 'Dodawanie Pomysłów',
+          label: 'Add Idea',
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.check),
-          label: 'Centrum Walidacji',
+          label: 'Validate',
         ),
       ],
     );
-  }
-
-  int _getPageIndex(BottomNavigationBarPage page) {
-    switch (page) {
-      case BottomNavigationBarPage.home:
-        return 0;
-      case BottomNavigationBarPage.adding:
-        return 1;
-      case BottomNavigationBarPage.validation:
-        return 2;
-      default:
-        return 0;
-    }
-  }
-
-  void _navigateToPage(BuildContext context, int index) {
-    switch (index) {
-      case 0:
-        Navigator.pushNamed(context, '/');
-        break;
-      case 1:
-        Navigator.pushNamed(context, '/adding');
-        break;
-      case 2:
-        Navigator.pushNamed(context, '/validation');
-        break;
-    }
   }
 }

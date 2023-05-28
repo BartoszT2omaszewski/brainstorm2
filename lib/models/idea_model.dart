@@ -10,4 +10,9 @@ class IdeaModel {
     required this.title,
     required this.description,
   });
+
+  @override
+  String toString() {
+    return 'IdeaModel { id: $id, author: $author, title: $title, description: $description }';
+  }
 }

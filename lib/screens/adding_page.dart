@@ -1,76 +1,47 @@
-import 'package:brainstorm2/models/idea_model.dart';
 import 'package:flutter/material.dart';
+import 'package:brainstorm2/models/idea_model.dart';
 
-class AddingPage extends StatefulWidget {
-  final void Function(IdeaModel) addIdea;
-
-  const AddingPage({Key? key, required this.addIdea}) : super(key: key);
-
-  @override
-  _AddingPageState createState() => _AddingPageState();
-}
-
-class _AddingPageState extends State<AddingPage> {
+class AddingPage extends StatelessWidget {
   final TextEditingController _authorController = TextEditingController();
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final void Function(IdeaModel) addIdea;
 
-  @override
-  void dispose() {
-    _authorController.dispose();
-    _titleController.dispose();
-    _descriptionController.dispose();
-    super.dispose();
-  }
-
-  void _submitForm() {
-    final String author = _authorController.text.trim();
-    final String title = _titleController.text.trim();
-    final String description = _descriptionController.text.trim();
-
-    if (author.isNotEmpty && title.isNotEmpty && description.isNotEmpty) {
-      final IdeaModel idea = IdeaModel(
-          author: author, title: title, description: description, id: '');
-      widget.addIdea(idea);
-
-      Navigator.pop(context);
-    }
-  }
+  AddingPage({Key? key, required this.addIdea}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Idea'),
+        title: const Text('Dodawanie Pomysłu'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             TextField(
               controller: _authorController,
-              decoration: const InputDecoration(
-                labelText: 'Author',
-              ),
+              decoration: const InputDecoration(labelText: 'Author'),
             ),
-            const SizedBox(height: 16.0),
             TextField(
               controller: _titleController,
-              decoration: const InputDecoration(
-                labelText: 'Title',
-              ),
+              decoration: const InputDecoration(labelText: 'Title'),
             ),
-            const SizedBox(height: 16.0),
             TextField(
               controller: _descriptionController,
-              decoration: const InputDecoration(
-                labelText: 'Description',
-              ),
+              decoration: const InputDecoration(labelText: 'Description'),
             ),
-            const SizedBox(height: 24.0),
             ElevatedButton(
-              onPressed: _submitForm,
+              onPressed: () {
+                final idea = IdeaModel(
+                  id: DateTime.now().toString(),
+                  author: _authorController.text,
+                  title: _titleController.text,
+                  description: _descriptionController.text,
+                );
+                addIdea(idea);
+                Navigator.pop(context);
+              },
               child: const Text('Add Idea'),
             ),
           ],

@@ -1,15 +1,13 @@
+import 'package:brainstorm2/bloc/home/home_cubit.dart';
+import 'package:brainstorm2/bloc/home/home_state.dart';
 import 'package:flutter/material.dart';
-import 'package:brainstorm2/models/idea_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:brainstorm2/screens/adding_page.dart';
 import 'package:brainstorm2/widgets/bottom_navigation_bar.dart';
 import 'package:brainstorm2/widgets/idea_card.dart';
 
 class HomePage extends StatelessWidget {
-  final List<IdeaModel> ideas;
-  final void Function(IdeaModel) addIdea;
-
-  const HomePage({Key? key, required this.ideas, required this.addIdea})
-      : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,20 +36,26 @@ class HomePage extends StatelessWidget {
             ),
             const SizedBox(height: 16.0),
             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 16.0),
-                child: GridView.builder(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 16.0,
-                    mainAxisSpacing: 16.0,
-                  ),
-                  itemCount: ideas.length,
-                  itemBuilder: (context, index) {
-                    final idea = ideas[index];
-                    return IdeaCard(idea: idea);
-                  },
-                ),
+              child: BlocBuilder<HomeCubit, HomeState>(
+                builder: (context, state) {
+                  if (state is HomeData) {
+                    final ideas = state.ideas;
+                    return GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16.0,
+                        mainAxisSpacing: 16.0,
+                      ),
+                      itemCount: ideas.length,
+                      itemBuilder: (context, index) {
+                        final idea = ideas[index];
+                        return IdeaCard(idea: idea);
+                      },
+                    );
+                  }
+                  return const SizedBox(); // Return an empty SizedBox if state is not HomeData
+                },
               ),
             ),
           ],
@@ -62,14 +66,19 @@ class HomePage extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddingPage(addIdea: addIdea),
+              builder: (context) => AddingPage(
+                addIdea: (IdeaModel) {},
+              ),
             ),
           );
         },
         child: const Icon(Icons.add),
       ),
-      bottomNavigationBar: const MyBottomNavigationBar(
+      bottomNavigationBar: MyBottomNavigationBar(
         selectedPage: BottomNavigationBarPage.home,
+        onPageSelected: (page) {
+          context.read<HomeCubit>().navigateToPage(page as int);
+        },
       ),
     );
   }
