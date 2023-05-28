@@ -7,7 +7,7 @@ abstract class HomeState extends Equatable {
   @override
   List<Object?> get props => [];
 
-  Iterable get ideas => null;
+  Iterable get ideas => [];
 
   // Iterable get ideas => null;
 }

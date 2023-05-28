@@ -1,8 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:brainstorm2/bloc/home/home_state.dart';
 import 'package:brainstorm2/models/idea_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum BottomNavigationBarPage {
+enum BottomNavBarPage {
   home,
   adding,
   validation,
@@ -11,7 +11,7 @@ enum BottomNavigationBarPage {
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
 
-  void navigateToPage(BottomNavigationBarPage page) {
+  void navigateToPage(BottomNavBarPage page) {
     emit(HomeNavigation(page as int));
   }
 

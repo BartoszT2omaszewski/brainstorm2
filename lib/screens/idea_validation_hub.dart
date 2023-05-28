@@ -11,11 +11,11 @@ class IdeaValidationHub extends StatelessWidget {
       appBar: const MyAppBar(
         title: 'Centrum Walidacji Pomysłów Społeczności',
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: const [
+          children: [
             Text(
               'Centrum Walidacji Pomysłów Społeczności',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),

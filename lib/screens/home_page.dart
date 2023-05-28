@@ -1,10 +1,10 @@
 import 'package:brainstorm2/bloc/home/home_cubit.dart';
 import 'package:brainstorm2/bloc/home/home_state.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:brainstorm2/screens/adding_page.dart';
 import 'package:brainstorm2/widgets/bottom_navigation_bar.dart';
 import 'package:brainstorm2/widgets/idea_card.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -67,7 +67,7 @@ class HomePage extends StatelessWidget {
             context,
             MaterialPageRoute(
               builder: (context) => AddingPage(
-                addIdea: (IdeaModel) {},
+                addIdea: (ideaModel) {},
               ),
             ),
           );
@@ -77,7 +77,7 @@ class HomePage extends StatelessWidget {
       bottomNavigationBar: MyBottomNavigationBar(
         selectedPage: BottomNavigationBarPage.home,
         onPageSelected: (page) {
-          context.read<HomeCubit>().navigateToPage(page);
+          // context.read<HomeCubit>().navigateToPage(page as BottomNavBarPage);
         },
       ),
     );
